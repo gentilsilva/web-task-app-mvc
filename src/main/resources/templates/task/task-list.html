@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+  <head>
+    <title>Task list</title>
+  </head>
+  <body>
+    <div layout:th:fragment="content">
+      <main>
+        <section>
+          <h2>Tasks</h2>
+            <div>
+              <button>
+                <a href="register-form.html" th:href="@{/tasks/form}">
+                  Create new Task
+                </a>
+              </button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th th:each="column : ${columns}"
+                      th:text="${column}"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="task : ${tasks}">
+                  <td th:each="column : ${columns}"
+                      th:text="${task[column]}"
+                  ></td>
+                </tr>
+              </tbody>
+            </table>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

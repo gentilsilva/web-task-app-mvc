@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+    <head>
+        <title>Task form</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <main>
+                <section>
+                    <h2>Task create form</h2>
+                    <form method="post" th:action="@{/tasks}" th:object="${data}">
+                        <div>
+                            <label>Title</label>
+                            <input type="text" id="title" th:field="*{title}" placeholder="Input title here">
+                        </div>
+                        <div>
+                            <label>Description</label>
+                            <textarea rows="4" cols="40" placeholder="Input Description here" id="description" th:field="*{description}"></textarea>
+                        </div>
+                        <div>
+                            <select id="prioiry" name="priority" required th:field="*{priority}">
+                                <option th:value="${null}">Select Priority</option>
+                                <option th:each="priority : ${priorities}" th:value="${priority}" th:text="${priority}" th:selected="${data.priority == priority}"></option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit">
+                                Create
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            </main>
+        </div>
+    </body>
+</html>

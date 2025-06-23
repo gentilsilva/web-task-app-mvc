@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+  <title>Task form</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <main>
+    <section>
+      <h2>Task Update form</h2>
+      <form method="post" th:action="@{/tasks/update-task}" th:object="${data}">
+        <input type="hidden" id="id" name="id" th:field="*{id}" />
+        <div>
+          <label>Title</label>
+          <input type="text" id="title" name="title" th:field="*{title}" placeholder="Input title here">
+        </div>
+        <div>
+          <label>Description</label>
+          <textarea rows="4" cols="40" placeholder="Input Description here" id="description" name="description" th:field="*{description}"></textarea>
+        </div>
+        <div>
+          <select id="priority" name="priority" required th:field="*{priority}">
+            <option th:value="${null}">Select Priority</option>
+            <option th:each="priority : ${priorities}" th:value="${priority}" th:text="${priority}" th:selected="${data.priority == priority}"></option>
+          </select>
+        </div>
+        <div>
+          <button type="submit">
+            Save
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+</div>
+</body>
+</html>

@@ -44,12 +44,24 @@ class Task {
         return this.title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getDescription() {
         return this.description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Status getStatus() {
         return this.status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Priority getPriority() {
@@ -64,8 +76,16 @@ class Task {
         return this.updated;
     }
 
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = dateTimeFormatter(updated);
+    }
+
     public LocalDateTime getFinished() {
         return this.finished;
+    }
+
+    public void setFinished(LocalDateTime finished) {
+        this.finished = dateTimeFormatter(finished);
     }
 
     private LocalDateTime dateTimeFormatter(LocalDateTime localDateTime) {

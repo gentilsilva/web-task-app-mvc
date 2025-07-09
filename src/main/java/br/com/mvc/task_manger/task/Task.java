@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tasks")
@@ -21,8 +23,10 @@ class Task {
     @Enumerated(EnumType.STRING)
     private Priority priority;
     private LocalDateTime created;
-    private LocalDateTime updated;
     private LocalDateTime finished;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    private List<TaskHistory> taskHistory = new ArrayList<TaskHistory>();
 
     protected Task() {}
 
@@ -32,7 +36,6 @@ class Task {
         this.status = Status.OPEN;
         this.priority = data.priority();
         this.created = dateTimeFormatter(LocalDateTime.now());
-        this.updated = null;
         this.finished = null;
     }
 
@@ -70,14 +73,6 @@ class Task {
 
     public LocalDateTime getCreate() {
         return this.created;
-    }
-
-    public LocalDateTime getUpdate() {
-        return this.updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = dateTimeFormatter(updated);
     }
 
     public LocalDateTime getFinished() {
